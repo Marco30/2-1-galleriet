@@ -13,5 +13,14 @@ namespace _1DV406_Labb2_1
         {
 
         }
+        protected void UploadButton_Click(object sender, EventArgs e)
+        {
+        }
+
+    
+        protected void ThumbsRepeater_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+          
+        }
     }
 }
