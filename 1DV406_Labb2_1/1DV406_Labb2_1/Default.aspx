@@ -1,44 +1,72 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="_1DV406_Labb2_1.Default" ViewStateMode="Disabled"%>
 
 <!DOCTYPE html>
-
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="sv">
 <head runat="server">
-
-    <title>Marcos - Labb 2.1</title>
-
-    <link rel="stylesheet" href="Style.css" media="screen">
-
+    <title>Galleriet</title>
+    <!--<link rel="stylesheet" type="text/css" href="~/css/style.css" />-->
 </head>
 <body>
     <form id="form1" runat="server">
 
-    <div id="inramning">
+        <div class="inramning">
 
-			
-				<h1>Galleriet</h1>
-				<p>
-					<!--här väljer man fil att ladda up--->
+            <h1>Marcos Gallery</h1>
 
-					<asp:FileUpload ID="FileUpload" runat="server" />
+            <!-- Visar att upplandning lyckats -->
+            <div id="Message" runat="server" visible="false">
+                <h2>
+                    <asp:Literal ID="StatusMessage" runat="server"></asp:Literal></h2>
+                <a href="#" id="CloseMessage">Stäng meddelande</a>
+            </div>
 
-					<!-- Validering: Kontrollerar om textboxsen är tom-->
-					<asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server"
-						ErrorMessage="En fil måste väljas" ControlToValidate="MyFileUpload" Display="None">
-					</asp:RequiredFieldValidator>
-
-                    <!-- Validering: Kontrollerar om filen som ladas upp är av bild format-->
-					<asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server"
-						ControlToValidate="MyFileUpload" ValidationExpression=".*.(gif|GIF|jpg|JPG|png|PNG)"
-						ErrorMessage="Endast bilder av typerna gif, jpg eller png är tillåtna" Display="None">
-					</asp:RegularExpressionValidator>
-
-                    <!-- ladda upp knap-->
-					<asp:Button ID="UploadButton" runat="server" Text="Ladda upp" OnClick="UploadButton_Click" />
-				</p>
+            <h2>Bildvisaren</h2>
+            <!-- loppar igenom bilderna och Presenterar dem -->
+            <asp:Image ID="SelectedImage" Width="100%" runat="server" />
 
 
-  </div>
+            <!-- Visar den valda bilden  -->
+            <asp:Repeater ID="GalleryThumbnailsRepeater" runat="server" ItemType="Gallery.Models.GalleryClass" SelectMethod="GalleryThumbnailsRepeater_GetData">
+                <ItemTemplate>
+                    <asp:HyperLink ID="PictureHyperLink" runat="server" NavigateUrl='<%# "~/Default.aspx?Picture=" + Item.Name %>'>
+                       <img src='<%# "galleryImages/thumbnails/" + Item.Name %>' width="150" height="150" Class='<%# Item.Name %>' alt="" runat="server" />
+                      </asp:HyperLink>
+                </ItemTemplate>
+            </asp:Repeater>
+
+
+            <h2>Ladda upp bild</h2>
+
+            <p>Välj bilden</p>
+
+            <!-- Visar alla samlade fel meddelanden -->
+            <asp:ValidationSummary ID="ValidationSummary1" runat="server" CssClass="field-validation-error" />
+
+            <!-- ladd upp bild -->
+            <asp:FileUpload ID="PictureUpload" runat="server" CssClass="standardButton" />
+
+            <!-- Validering: Kontrollerar man vald bild-->
+            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="En fil måste väljas!" Text="*"
+                ControlToValidate="PictureUpload" Display="Dynamic" CssClass="field-validation-error"></asp:RequiredFieldValidator>
+
+            <!-- Validering: Kontrollerar om filen som ladas upp är av bild format-->
+            <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="Filen är inte av typen JPG/PNG/GIF"
+                Text="*" ControlToValidate="PictureUpload" CssClass="field-validation-error"
+                Display="Dynamic" ValidationExpression="([^\s]+(\.(?i)(jpg|png|gif))$)"></asp:RegularExpressionValidator>
+
+            <!-- knap-->
+            <asp:Button ID="UploadButton" runat="server" Text="Ladda upp bild" CssClass="standardButton" OnClick="UploadButton_Click" />
+
+            <footer class="footer">
+                <a>Marco</a>
+
+            </footer>
+        </div>
+
     </form>
+
+    <!-- Sätter fokus på bilden man lagt in och tar bort ladda upp meddelande-->
+    <script type="text/javascript" src="js/scripts.js"></script>
+
 </body>
 </html>
