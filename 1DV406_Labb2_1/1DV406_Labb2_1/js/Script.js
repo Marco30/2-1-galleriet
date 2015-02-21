@@ -1,4 +1,4 @@
-﻿function getQueryVariable(variable)
+﻿function getQueryVariable(variable)  //Sätter fokus på bilden man tryckt på
 {
     var query = window.location.search.substring(1);
     var vars = query.split("&");
@@ -17,8 +17,8 @@
 var imglink = getQueryVariable("Picture");
 var pictureClass = document.getElementsByClassName(imglink)[0].setAttribute("class", "imageBorder");
 
-document.getElementById("CloseMessage").onclick = function ()
+document.getElementById("CloseMessage").onclick = function ()// Tar bort medlande som visas efter att man lyckat lada upp bild 
 {
-    document.getElementById("MessageWrapper").innerHTML = "";
+    document.getElementById("Close").innerHTML = "";
     return false;
 };

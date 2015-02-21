@@ -1,10 +1,11 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="_1DV406_Labb2_1.Default" ViewStateMode="Disabled"%>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="_1DV406_Labb2_1.Default" ViewStateMode="Disabled" %>
 
 <!DOCTYPE html>
 <html lang="sv">
 <head runat="server">
-    <title>Galleriet</title>
-    <!--<link rel="stylesheet" type="text/css" href="~/css/style.css" />-->
+    <title>Marco - Labb 2.1</title>
+
+    <link rel="stylesheet" href="Style.css" media="screen">
 </head>
 <body>
     <form id="form1" runat="server">
@@ -14,10 +15,12 @@
             <h1>Marcos Gallery</h1>
 
             <!-- Visar att upplandning lyckats -->
-            <div id="Message" runat="server" visible="false">
-                <h2>
-                    <asp:Literal ID="StatusMessage" runat="server"></asp:Literal></h2>
-                <a href="#" id="CloseMessage">Stäng meddelande</a>
+            <div id="Close">
+                <div id="Message" runat="server" visible="false">
+                    <h2>
+                        <asp:Literal ID="StatusMessage" runat="server"></asp:Literal></h2>
+                    <a href="#" id="CloseMessage">Stäng meddelande</a>
+                </div>
             </div>
 
             <h2>Bildvisaren</h2>
@@ -26,10 +29,10 @@
 
 
             <!-- Visar den valda bilden  -->
-            <asp:Repeater ID="GalleryThumbnailsRepeater" runat="server" ItemType="Gallery.Models.GalleryClass" SelectMethod="GalleryThumbnailsRepeater_GetData">
+            <asp:Repeater ID="GalleryThumbnailsRepeater" runat="server" ItemType="_1DV406_Labb2_1.Model.GalleryClass" SelectMethod="GalleryThumbnailsRepeater_GetData">
                 <ItemTemplate>
                     <asp:HyperLink ID="PictureHyperLink" runat="server" NavigateUrl='<%# "~/Default.aspx?Picture=" + Item.Name %>'>
-                       <img src='<%# "galleryImages/thumbnails/" + Item.Name %>' width="150" height="150" Class='<%# Item.Name %>' alt="" runat="server" />
+                       <img src='<%# "Bilder/thumbnails/" + Item.Name %>' width="150" height="150" Class='<%# Item.Name %>' alt="" runat="server" />
                       </asp:HyperLink>
                 </ItemTemplate>
             </asp:Repeater>
@@ -50,7 +53,7 @@
                 ControlToValidate="PictureUpload" Display="Dynamic" CssClass="field-validation-error"></asp:RequiredFieldValidator>
 
             <!-- Validering: Kontrollerar om filen som ladas upp är av bild format-->
-            <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="Filen är inte av typen JPG/PNG/GIF"
+           <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="Filen är inte av typen JPG/PNG/GIF"
                 Text="*" ControlToValidate="PictureUpload" CssClass="field-validation-error"
                 Display="Dynamic" ValidationExpression="([^\s]+(\.(?i)(jpg|png|gif))$)"></asp:RegularExpressionValidator>
 
@@ -66,7 +69,8 @@
     </form>
 
     <!-- Sätter fokus på bilden man lagt in och tar bort ladda upp meddelande-->
-    <script type="text/javascript" src="js/scripts.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
 
 </body>
 </html>
+
