@@ -100,7 +100,7 @@ namespace _1DV406_Labb2_1.Model// Marco villegas
 
             image.Save(Path.Combine(Bildsokveg, fileName));// bilden har klarat alla valideringar, bilden sparas  
 
-            System.Drawing.Image thumbnail = image.GetThumbnailImage(150, 150, null, System.IntPtr.Zero);//Här setter vi storläk på tumnagel bilden med hjälp av image.GetThumbnailImage(
+            System.Drawing.Image thumbnail = image.GetThumbnailImage(100, 100, null, System.IntPtr.Zero);//Här setter vi storläk på tumnagel bilden med hjälp av image.GetThumbnailImage(
             thumbnail.Save(Path.Combine(thumbnailssokveg, fileName));//Här sparar vi tumnagel bilden 
 
             return fileName;
