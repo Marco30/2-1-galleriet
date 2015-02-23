@@ -181,6 +181,11 @@ line-height: 31px;
 color: #F51515;
 }
 
+.imageBorder 
+{
+    border: 3px solid;
+}
+
 #val
 {
 margin: -45px 0px -30px 187px;

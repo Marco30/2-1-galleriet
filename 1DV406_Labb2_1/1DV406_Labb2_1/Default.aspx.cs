@@ -26,7 +26,7 @@ namespace _1DV406_Labb2_1// Marco villegas
         protected void Page_Load(object sender, EventArgs e)
         {
 
-            //hämtar bilden ur QueryString som finns i deafultt
+            //hämtar fysisnka sökvägen ur QueryString
             if (Request.QueryString["Picture"] != null)//om QueryStringär lika med null så hämtar bilden för att visas i större format 
             {
                 SelectedImage.ImageUrl = String.Format("/Bilder/{0}", Request.QueryString["Picture"]);
